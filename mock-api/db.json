@@ -1,0 +1,579 @@
+{
+  "tests": [
+    {
+      "id": "sbi-po-prelims-live-06",
+      "title": "All India SBI PO Prelims: Ultimate Mega Live Test 06",
+      "subtitle": "Bank PO Prelims Mock",
+      "durationMinutes": 60,
+      "totalQuestions": 30
+    }
+  ],
+  "sections": [
+    {
+      "id": "english-language",
+      "testId": "sbi-po-prelims-live-06",
+      "name": "English Language",
+      "shortName": "English Langu...",
+      "questionCount": 10,
+      "durationMinutes": 20
+    },
+    {
+      "id": "quantitative-aptitude",
+      "testId": "sbi-po-prelims-live-06",
+      "name": "Quantitative Aptitude",
+      "shortName": "Quantitative Ap...",
+      "questionCount": 10,
+      "durationMinutes": 20
+    },
+    {
+      "id": "reasoning-ability",
+      "testId": "sbi-po-prelims-live-06",
+      "name": "Reasoning Ability",
+      "shortName": "Reasoning Ability",
+      "questionCount": 10,
+      "durationMinutes": 20
+    }
+  ],
+  "questions": [
+    {
+      "id": "q-1",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "english-language",
+      "title": "Error Spotting",
+      "direction": "Directions: Read each sentence to find out whether there is any grammatical error in it. The error, if any, will be in one part of the sentence. The letter of that part is the answer. If there is no error, the answer is (E).",
+      "prompt": "(A) Despite of the heavy rains / (B) the match continued / (C) without any interruption / (D) till the final over. / (E) No error",
+      "typeLabel": "Error Spotting",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-1-o-1", "label": "A" },
+        { "id": "q-1-o-2", "label": "B" },
+        { "id": "q-1-o-3", "label": "C" },
+        { "id": "q-1-o-4", "label": "D" },
+        { "id": "q-1-o-5", "label": "E" }
+      ]
+    },
+    {
+      "id": "q-2",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "english-language",
+      "title": "Vocabulary",
+      "direction": "Directions: In each of the following questions, a word has been given and used in three statements. Identify which statement(s) use(s) the word incorrectly.",
+      "prompt": "Pernicious\nI. Excessive screen time can have pernicious consequences for young children.\nII. The teacher praised his pernicious efforts in completing the project.\nIII. Corruption has a pernicious influence on democratic institutions.",
+      "typeLabel": "Vocabulary Usage",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-2-o-1", "label": "Only I" },
+        { "id": "q-2-o-2", "label": "Only II" },
+        { "id": "q-2-o-3", "label": "Only III" },
+        { "id": "q-2-o-4", "label": "Both I & II" },
+        { "id": "q-2-o-5", "label": "Both II & III" }
+      ]
+    },
+    {
+      "id": "q-3",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "english-language",
+      "title": "Vocabulary",
+      "direction": "Directions: In each of the following questions, a word has been given and used in three statements. Identify which statement(s) use(s) the word incorrectly.",
+      "prompt": "Eradicate\nI. The company eradicated into the stock market to raise capital.\nII. He eradicated happily across the playground.\nIII. They planned to eradicate at the cafe before the concert.",
+      "typeLabel": "Vocabulary Usage",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-3-o-1", "label": "Only II" },
+        { "id": "q-3-o-2", "label": "Only III" },
+        { "id": "q-3-o-3", "label": "Both I & II" },
+        { "id": "q-3-o-4", "label": "Both II & III" },
+        { "id": "q-3-o-5", "label": "All I, II & III" }
+      ]
+    },
+    {
+      "id": "q-4",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "english-language",
+      "title": "Cloze Test",
+      "direction": "Directions: Choose the most appropriate word to fill the blank.",
+      "prompt": "The committee decided to _______ the proposal after a long discussion.",
+      "typeLabel": "Cloze",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-4-o-1", "label": "defer" },
+        { "id": "q-4-o-2", "label": "differ" },
+        { "id": "q-4-o-3", "label": "infer" },
+        { "id": "q-4-o-4", "label": "refer" },
+        { "id": "q-4-o-5", "label": "prefer" }
+      ]
+    },
+    {
+      "id": "q-5",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "english-language",
+      "title": "Error Spotting",
+      "direction": "Directions: Read each sentence to find out whether there is any grammatical error in it. The error, if any, will be in one part of the sentence. The letter of that part is the answer. If there is no error, the answer is (E).",
+      "prompt": "(A) She is one of those teachers / (B) who always inspire / (C) their students / (D) to work hard. / (E) No error",
+      "typeLabel": "Error Spotting",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-5-o-1", "label": "A" },
+        { "id": "q-5-o-2", "label": "B" },
+        { "id": "q-5-o-3", "label": "C" },
+        { "id": "q-5-o-4", "label": "D" },
+        { "id": "q-5-o-5", "label": "E" }
+      ]
+    },
+    {
+      "id": "q-6",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "english-language",
+      "title": "Synonym",
+      "direction": "Directions: Choose the word most similar in meaning to the given word.",
+      "prompt": "CANDID",
+      "typeLabel": "Synonym",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-6-o-1", "label": "Frank" },
+        { "id": "q-6-o-2", "label": "Vague" },
+        { "id": "q-6-o-3", "label": "Secretive" },
+        { "id": "q-6-o-4", "label": "Biased" },
+        { "id": "q-6-o-5", "label": "Confused" }
+      ]
+    },
+    {
+      "id": "q-7",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "english-language",
+      "title": "Antonym",
+      "direction": "Directions: Choose the word opposite in meaning to the given word.",
+      "prompt": "OBSOLETE",
+      "typeLabel": "Antonym",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-7-o-1", "label": "Modern" },
+        { "id": "q-7-o-2", "label": "Ancient" },
+        { "id": "q-7-o-3", "label": "Useless" },
+        { "id": "q-7-o-4", "label": "Rare" },
+        { "id": "q-7-o-5", "label": "Broken" }
+      ]
+    },
+    {
+      "id": "q-8",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "english-language",
+      "title": "Sentence Improvement",
+      "direction": "Directions: Choose the best replacement for the underlined part.",
+      "prompt": "He insisted on that he was innocent.",
+      "typeLabel": "Sentence Improvement",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-8-o-1", "label": "insisted that he was" },
+        { "id": "q-8-o-2", "label": "insisted for that he was" },
+        { "id": "q-8-o-3", "label": "insisted to being" },
+        { "id": "q-8-o-4", "label": "insisted of that he was" },
+        { "id": "q-8-o-5", "label": "No improvement" }
+      ]
+    },
+    {
+      "id": "q-9",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "english-language",
+      "title": "Fill in the blanks",
+      "direction": "Directions: Fill in the blanks with the most appropriate option.",
+      "prompt": "The speaker's _______ remarks helped placate the angry audience.",
+      "typeLabel": "Fill Blanks",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-9-o-1", "label": "conciliatory" },
+        { "id": "q-9-o-2", "label": "hostile" },
+        { "id": "q-9-o-3", "label": "abrasive" },
+        { "id": "q-9-o-4", "label": "ambiguous" },
+        { "id": "q-9-o-5", "label": "sarcastic" }
+      ]
+    },
+    {
+      "id": "q-10",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "english-language",
+      "title": "Para Jumble",
+      "direction": "Directions: Arrange the following sentences in a meaningful order.",
+      "prompt": "P. Finally, the results were announced.\nQ. Students waited anxiously outside the hall.\nR. The examination was conducted on Monday.\nS. Evaluation took nearly two weeks.",
+      "typeLabel": "Para Jumble",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-10-o-1", "label": "RQSP" },
+        { "id": "q-10-o-2", "label": "QRSP" },
+        { "id": "q-10-o-3", "label": "RSPQ" },
+        { "id": "q-10-o-4", "label": "SQRP" },
+        { "id": "q-10-o-5", "label": "PRQS" }
+      ]
+    },
+    {
+      "id": "q-11",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "quantitative-aptitude",
+      "title": "Simplification",
+      "direction": "Directions: What will come in place of the question mark (?) in the following question?",
+      "prompt": "45% of 800 + 25% of 480 = ?",
+      "typeLabel": "Simplification",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-11-o-1", "label": "460" },
+        { "id": "q-11-o-2", "label": "480" },
+        { "id": "q-11-o-3", "label": "500" },
+        { "id": "q-11-o-4", "label": "520" },
+        { "id": "q-11-o-5", "label": "None of these" }
+      ]
+    },
+    {
+      "id": "q-12",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "quantitative-aptitude",
+      "title": "Number Series",
+      "direction": "Directions: Find the wrong number in the series.",
+      "prompt": "7, 8, 18, 57, 228, 1165",
+      "typeLabel": "Number Series",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-12-o-1", "label": "8" },
+        { "id": "q-12-o-2", "label": "18" },
+        { "id": "q-12-o-3", "label": "57" },
+        { "id": "q-12-o-4", "label": "228" },
+        { "id": "q-12-o-5", "label": "1165" }
+      ]
+    },
+    {
+      "id": "q-13",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "quantitative-aptitude",
+      "title": "Percentage",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "If the price of an article is increased by 20% and then decreased by 20%, the net change is:",
+      "typeLabel": "Percentage",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-13-o-1", "label": "No change" },
+        { "id": "q-13-o-2", "label": "4% decrease" },
+        { "id": "q-13-o-3", "label": "4% increase" },
+        { "id": "q-13-o-4", "label": "2% decrease" },
+        { "id": "q-13-o-5", "label": "2% increase" }
+      ]
+    },
+    {
+      "id": "q-14",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "quantitative-aptitude",
+      "title": "Profit & Loss",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "A shopkeeper sells an item at 10% profit. If he had bought it at 10% less and sold it for Rs 10 more, he would have gained 25%. Find the cost price.",
+      "typeLabel": "Profit & Loss",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-14-o-1", "label": "Rs 400" },
+        { "id": "q-14-o-2", "label": "Rs 450" },
+        { "id": "q-14-o-3", "label": "Rs 500" },
+        { "id": "q-14-o-4", "label": "Rs 550" },
+        { "id": "q-14-o-5", "label": "Rs 600" }
+      ]
+    },
+    {
+      "id": "q-15",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "quantitative-aptitude",
+      "title": "Time & Work",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "A can do a work in 12 days and B in 18 days. Working together, they can finish it in:",
+      "typeLabel": "Time & Work",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-15-o-1", "label": "6 days" },
+        { "id": "q-15-o-2", "label": "7.2 days" },
+        { "id": "q-15-o-3", "label": "8 days" },
+        { "id": "q-15-o-4", "label": "9 days" },
+        { "id": "q-15-o-5", "label": "10 days" }
+      ]
+    },
+    {
+      "id": "q-16",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "quantitative-aptitude",
+      "title": "SI/CI",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "Simple interest on a sum for 2 years at 10% p.a. is Rs 400. Compound interest for the same period is:",
+      "typeLabel": "Interest",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-16-o-1", "label": "Rs 400" },
+        { "id": "q-16-o-2", "label": "Rs 410" },
+        { "id": "q-16-o-3", "label": "Rs 420" },
+        { "id": "q-16-o-4", "label": "Rs 440" },
+        { "id": "q-16-o-5", "label": "Rs 450" }
+      ]
+    },
+    {
+      "id": "q-17",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "quantitative-aptitude",
+      "title": "Average",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "The average of 5 numbers is 40. If one number is excluded, the average becomes 38. The excluded number is:",
+      "typeLabel": "Average",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-17-o-1", "label": "40" },
+        { "id": "q-17-o-2", "label": "42" },
+        { "id": "q-17-o-3", "label": "48" },
+        { "id": "q-17-o-4", "label": "50" },
+        { "id": "q-17-o-5", "label": "52" }
+      ]
+    },
+    {
+      "id": "q-18",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "quantitative-aptitude",
+      "title": "Ratio",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "The ratio of ages of A and B is 3:4. After 6 years, the ratio becomes 4:5. Present age of A is:",
+      "typeLabel": "Ratio",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-18-o-1", "label": "12 years" },
+        { "id": "q-18-o-2", "label": "15 years" },
+        { "id": "q-18-o-3", "label": "18 years" },
+        { "id": "q-18-o-4", "label": "21 years" },
+        { "id": "q-18-o-5", "label": "24 years" }
+      ]
+    },
+    {
+      "id": "q-19",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "quantitative-aptitude",
+      "title": "Speed Distance",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "A train 150 m long crosses a platform 250 m long in 20 seconds. Speed of the train is:",
+      "typeLabel": "Speed Distance",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-19-o-1", "label": "54 km/h" },
+        { "id": "q-19-o-2", "label": "60 km/h" },
+        { "id": "q-19-o-3", "label": "72 km/h" },
+        { "id": "q-19-o-4", "label": "80 km/h" },
+        { "id": "q-19-o-5", "label": "90 km/h" }
+      ]
+    },
+    {
+      "id": "q-20",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "quantitative-aptitude",
+      "title": "Data Interpretation",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "If a company's revenue increased from 80 to 100 crore, the percentage increase is:",
+      "typeLabel": "DI",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-20-o-1", "label": "20%" },
+        { "id": "q-20-o-2", "label": "22%" },
+        { "id": "q-20-o-3", "label": "25%" },
+        { "id": "q-20-o-4", "label": "30%" },
+        { "id": "q-20-o-5", "label": "35%" }
+      ]
+    },
+    {
+      "id": "q-21",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "reasoning-ability",
+      "title": "Syllogism",
+      "direction": "Directions: Statements are followed by conclusions. Choose the correct option.",
+      "prompt": "Statements: All books are pens. Some pens are pencils.\nConclusions: I. Some books are pencils. II. No book is a pencil.",
+      "typeLabel": "Syllogism",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-21-o-1", "label": "Only I follows" },
+        { "id": "q-21-o-2", "label": "Only II follows" },
+        { "id": "q-21-o-3", "label": "Either I or II follows" },
+        { "id": "q-21-o-4", "label": "Neither follows" },
+        { "id": "q-21-o-5", "label": "Both follow" }
+      ]
+    },
+    {
+      "id": "q-22",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "reasoning-ability",
+      "title": "Coding Decoding",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "If BANK is coded as CZOL, how is MOCK coded?",
+      "typeLabel": "Coding",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-22-o-1", "label": "NPDL" },
+        { "id": "q-22-o-2", "label": "NPDJ" },
+        { "id": "q-22-o-3", "label": "LQBJ" },
+        { "id": "q-22-o-4", "label": "NPBL" },
+        { "id": "q-22-o-5", "label": "None of these" }
+      ]
+    },
+    {
+      "id": "q-23",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "reasoning-ability",
+      "title": "Blood Relation",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "Pointing to a photo, Ravi said, \"She is the daughter of my grandfather's only son.\" How is the girl related to Ravi?",
+      "typeLabel": "Blood Relation",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-23-o-1", "label": "Sister" },
+        { "id": "q-23-o-2", "label": "Cousin" },
+        { "id": "q-23-o-3", "label": "Daughter" },
+        { "id": "q-23-o-4", "label": "Niece" },
+        { "id": "q-23-o-5", "label": "Aunt" }
+      ]
+    },
+    {
+      "id": "q-24",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "reasoning-ability",
+      "title": "Inequality",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "Statements: A > B ≥ C = D < E\nConclusions: I. A > D  II. B < E",
+      "typeLabel": "Inequality",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-24-o-1", "label": "Only I is true" },
+        { "id": "q-24-o-2", "label": "Only II is true" },
+        { "id": "q-24-o-3", "label": "Either I or II is true" },
+        { "id": "q-24-o-4", "label": "Both are true" },
+        { "id": "q-24-o-5", "label": "Neither is true" }
+      ]
+    },
+    {
+      "id": "q-25",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "reasoning-ability",
+      "title": "Seating Arrangement",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "Five friends sit in a row facing north. A is to the left of B but right of C. D is to the right of B. Who is in the middle?",
+      "typeLabel": "Seating",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-25-o-1", "label": "A" },
+        { "id": "q-25-o-2", "label": "B" },
+        { "id": "q-25-o-3", "label": "C" },
+        { "id": "q-25-o-4", "label": "D" },
+        { "id": "q-25-o-5", "label": "Cannot be determined" }
+      ]
+    },
+    {
+      "id": "q-26",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "reasoning-ability",
+      "title": "Puzzle",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "Six people live on six floors. P lives above Q. R lives on floor 2. Who cannot live on floor 6?",
+      "typeLabel": "Puzzle",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-26-o-1", "label": "P" },
+        { "id": "q-26-o-2", "label": "Q" },
+        { "id": "q-26-o-3", "label": "R" },
+        { "id": "q-26-o-4", "label": "Both Q and R" },
+        { "id": "q-26-o-5", "label": "Data insufficient" }
+      ]
+    },
+    {
+      "id": "q-27",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "reasoning-ability",
+      "title": "Direction Sense",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "A man walks 5 km north, then 3 km east, then 5 km south. How far is he from the starting point?",
+      "typeLabel": "Direction",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-27-o-1", "label": "2 km" },
+        { "id": "q-27-o-2", "label": "3 km" },
+        { "id": "q-27-o-3", "label": "5 km" },
+        { "id": "q-27-o-4", "label": "8 km" },
+        { "id": "q-27-o-5", "label": "13 km" }
+      ]
+    },
+    {
+      "id": "q-28",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "reasoning-ability",
+      "title": "Alphabet Series",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "Find the next term: AZ, BY, CX, ?",
+      "typeLabel": "Series",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-28-o-1", "label": "DW" },
+        { "id": "q-28-o-2", "label": "DV" },
+        { "id": "q-28-o-3", "label": "EW" },
+        { "id": "q-28-o-4", "label": "DU" },
+        { "id": "q-28-o-5", "label": "EV" }
+      ]
+    },
+    {
+      "id": "q-29",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "reasoning-ability",
+      "title": "Odd One Out",
+      "direction": "Directions: Choose the odd one out.",
+      "prompt": "Which does not belong to the group?",
+      "typeLabel": "Odd One Out",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-29-o-1", "label": "Square" },
+        { "id": "q-29-o-2", "label": "Circle" },
+        { "id": "q-29-o-3", "label": "Triangle" },
+        { "id": "q-29-o-4", "label": "Rectangle" },
+        { "id": "q-29-o-5", "label": "Cube" }
+      ]
+    },
+    {
+      "id": "q-30",
+      "testId": "sbi-po-prelims-live-06",
+      "sectionId": "reasoning-ability",
+      "title": "Input Output",
+      "direction": "Directions: Choose the correct answer.",
+      "prompt": "In a certain machine, input \"bank exam test\" becomes \"knab maxe tset\". What is the rule?",
+      "typeLabel": "Input Output",
+      "positiveMarks": 1,
+      "negativeMarks": 0.25,
+      "options": [
+        { "id": "q-30-o-1", "label": "Reverse each word" },
+        { "id": "q-30-o-2", "label": "Sort alphabetically" },
+        { "id": "q-30-o-3", "label": "Shift letters by 1" },
+        { "id": "q-30-o-4", "label": "Capitalize all" },
+        { "id": "q-30-o-5", "label": "None of these" }
+      ]
+    }
+  ]
+}
