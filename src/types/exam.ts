@@ -1,4 +1,9 @@
-export type SectionId = 'english' | 'quantitative' | 'reasoning'
+export type SectionId =
+  | 'english'
+  | 'quantitative'
+  | 'reasoning'
+  | 'mathematics'
+  | 'general_knowledge'
 
 export enum QuestionStatus {
   NOT_VISITED = 'NOT_VISITED',
@@ -86,6 +91,8 @@ export interface ExamState {
   currentSectionId: SectionId
   remainingSeconds: number
   isPaused: boolean
+  /** When true, answers/navigation are frozen (e.g. time expired or submitted). */
+  isLocked: boolean
   isDarkMode: boolean
   isSidebarOpen: boolean
   paletteFilter: PaletteFilter

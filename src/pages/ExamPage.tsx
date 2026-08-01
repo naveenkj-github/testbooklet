@@ -15,15 +15,11 @@ import { Timer } from '@/components/common/Timer'
 import { useExam } from '@/hooks/useExam'
 import { useBreakpoint } from '@/hooks/useBreakpoint'
 import { useAuthStore } from '@/store/authStore'
+import { useExamStore } from '@/store/examStore'
 import { buildExamReport, buildSectionReport, type ExamScoreReport, type SectionScoreReport } from '@/lib/scoring'
 import { cn } from '@/lib/utils'
 
 export default function ExamPage() {
-  const exam = useExam(() => setSubmitOpen(true))
-  const { isMobile, showDockedSidebar } = useBreakpoint()
-  const session = useAuthStore((state) => state.session)
-  const logout = useAuthStore((state) => state.logout)
-  const navigate = useNavigate()
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [pauseOpen, setPauseOpen] = useState(false)
   const [submitOpen, setSubmitOpen] = useState(false)
@@ -34,6 +30,55 @@ export default function ExamPage() {
   const [sectionReport, setSectionReport] = useState<SectionScoreReport | null>(null)
   const [testReport, setTestReport] = useState<ExamScoreReport | null>(null)
   const [examFinished, setExamFinished] = useState(false)
+  const [timedOut, setTimedOut] = useState(false)
+
+  const finalizeAndShowReport = useCallback((fromTimeout: boolean) => {
+    const state = useExamStore.getState()
+    if (state.isLocked) return
+
+    state.autosave()
+    state.lockExam()
+
+    const report = buildExamReport({
+      title: state.meta.title,
+      sections: state.meta.sections,
+      questions: state.questions,
+      attempts: state.attempts,
+      totalDurationSeconds: state.meta.totalDurationMinutes * 60,
+      remainingSeconds: state.remainingSeconds,
+    })
+
+    setTestReport(report)
+    setExamFinished(true)
+    setTimedOut(fromTimeout)
+    setPauseOpen(false)
+    setSubmitOpen(false)
+    setSectionSubmitOpen(false)
+    setSectionReportOpen(false)
+    setReportOpen(false)
+    setTestReportOpen(true)
+  }, [])
+
+  const handleTimeUp = useCallback(() => {
+    finalizeAndShowReport(true)
+  }, [finalizeAndShowReport])
+
+  const exam = useExam(handleTimeUp)
+  const { isMobile, showDockedSidebar } = useBreakpoint()
+  const session = useAuthStore((state) => state.session)
+  const logout = useAuthStore((state) => state.logout)
+  const loadExam = useExamStore((state) => state.loadExam)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (session?.testId) {
+      setExamFinished(false)
+      setTimedOut(false)
+      setTestReportOpen(false)
+      setTestReport(null)
+      loadExam(session.testId)
+    }
+  }, [session?.testId, session?.loggedInAt, loadExam])
 
   const candidateName = session?.name ?? 'Student'
   const accessLabel = session?.testTitle ?? 'Passcode access'
@@ -50,7 +95,7 @@ export default function ExamPage() {
   }
 
   const openSectionReport = () => {
-    if (!activeSection) return
+    if (!activeSection || exam.isLocked) return
     const report = buildSectionReport(activeSection, exam.questions, exam.attempts)
     setSectionReport(report)
     setSectionSubmitOpen(false)
@@ -68,19 +113,7 @@ export default function ExamPage() {
   }
 
   const openTestReport = () => {
-    const report = buildExamReport({
-      title: exam.meta.title,
-      sections: exam.meta.sections,
-      questions: exam.questions,
-      attempts: exam.attempts,
-      totalDurationSeconds: exam.meta.totalDurationMinutes * 60,
-      remainingSeconds: exam.remainingSeconds,
-    })
-    setTestReport(report)
-    setSubmitOpen(false)
-    if (!exam.isPaused) exam.togglePause()
-    setExamFinished(true)
-    setTestReportOpen(true)
+    finalizeAndShowReport(false)
   }
 
   useEffect(() => {
@@ -108,6 +141,7 @@ export default function ExamPage() {
   }, [])
 
   const handlePauseToggle = () => {
+    if (exam.isLocked) return
     if (!exam.isPaused) {
       exam.togglePause()
       setPauseOpen(true)
@@ -119,10 +153,15 @@ export default function ExamPage() {
 
   return (
     <motion.div
-      className={cn('exam-shell bg-background text-text', exam.isDarkMode && 'dark')}
+      className={cn(
+        'exam-shell bg-background text-text',
+        exam.isDarkMode && 'dark',
+        exam.isLocked && 'pointer-events-none select-none',
+      )}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.25 }}
+      aria-disabled={exam.isLocked}
     >
       <Header
         title={exam.meta.title}
@@ -346,7 +385,7 @@ export default function ExamPage() {
 
       <Modal
         open={testReportOpen}
-        title="Test Report Card"
+        title={timedOut ? "Time's Up — Report Card" : 'Test Report Card'}
         onClose={() => undefined}
         dismissible={false}
         className="max-w-2xl"
@@ -372,6 +411,11 @@ export default function ExamPage() {
           </>
         }
       >
+        {timedOut ? (
+          <p className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-100">
+            Time is over. Your answers were auto-saved and the test screen is locked.
+          </p>
+        ) : null}
         {testReport ? (
           <ReportCard
             mode="test"

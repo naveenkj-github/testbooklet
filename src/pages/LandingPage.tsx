@@ -131,11 +131,13 @@ export default function LandingPage() {
               <div className="mt-auto flex items-end justify-between gap-3 pt-6">
                 <div>
                   <p className="text-xs font-medium text-[#94A3B8]">Price</p>
-                  <p className="text-2xl font-extrabold text-[#0F172A]">{formatInr(test.priceInr)}</p>
+                  <p className="text-2xl font-extrabold text-[#0F172A]">
+                    {test.priceInr === 0 ? 'Free' : formatInr(test.priceInr)}
+                  </p>
                 </div>
                 <Link to={`/checkout/${test.id}`}>
                   <Button className="gap-1.5">
-                    Buy now
+                    {test.priceInr === 0 ? 'Start free' : 'Buy now'}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </Link>

@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { CreditCard, Lock, ArrowLeft } from 'lucide-react'
+import { CreditCard, Gift, Lock, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/common/Button'
 import { getTestById } from '@/data/tests'
 import { formatInr, generatePasscode } from '@/lib/commerce'
@@ -16,13 +16,15 @@ export default function CheckoutPage() {
   const navigate = useNavigate()
   const [processing, setProcessing] = useState(false)
 
+  const isFree = Boolean(test && test.priceInr === 0)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<CheckoutFormValues>({
     defaultValues: {
-      fullName: '',
+      fullName: isFree ? 'Anvit Jain' : '',
       email: '',
       cardNumber: '',
       expiry: '',
@@ -35,13 +37,12 @@ export default function CheckoutPage() {
     return <Navigate to="/" replace />
   }
 
-  const onSubmit = async (values: CheckoutFormValues) => {
+  const completePurchase = async (buyerName: string) => {
     setProcessing(true)
-    // Mock payment latency
-    await new Promise((resolve) => setTimeout(resolve, 900))
+    await new Promise((resolve) => setTimeout(resolve, isFree ? 400 : 900))
 
     const purchaseId = `ord_${Date.now().toString(36)}`
-    const passcode = generatePasscode('CBT')
+    const passcode = generatePasscode(isFree ? 'FREE' : 'CBT')
 
     addPurchase({
       id: purchaseId,
@@ -49,11 +50,15 @@ export default function CheckoutPage() {
       testTitle: test.title,
       passcode,
       amountInr: test.priceInr,
-      buyerName: values.fullName.trim(),
+      buyerName: buyerName.trim(),
       purchasedAt: new Date().toISOString(),
     })
 
     navigate(`/purchase-success/${purchaseId}`, { replace: true })
+  }
+
+  const onSubmit = async (values: CheckoutFormValues) => {
+    await completePurchase(values.fullName)
   }
 
   return (
@@ -75,24 +80,26 @@ export default function CheckoutPage() {
           >
             <div className="mb-6 flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E8F8FD] text-[#00AEEF]">
-                <CreditCard className="h-5 w-5" />
+                {isFree ? <Gift className="h-5 w-5" /> : <CreditCard className="h-5 w-5" />}
               </div>
               <div>
-                <h1 className="text-xl font-bold text-[#0F172A]">Mock checkout</h1>
-                <p className="text-sm text-[#64748B]">No real payment — any valid-looking card works.</p>
+                <h1 className="text-xl font-bold text-[#0F172A]">
+                  {isFree ? 'Claim free test' : 'Mock checkout'}
+                </h1>
+                <p className="text-sm text-[#64748B]">
+                  {isFree
+                    ? 'No payment needed — get a free passcode for Anvit Jain.'
+                    : 'No real payment — any valid-looking card works.'}
+                </p>
               </div>
             </div>
 
             <div className="space-y-4">
-              <Field
-                id="fullName"
-                label="Full name on card"
-                error={errors.fullName?.message}
-              >
+              <Field id="fullName" label="Student name" error={errors.fullName?.message}>
                 <input
                   id="fullName"
                   className={inputClass(Boolean(errors.fullName))}
-                  placeholder="e.g. Naveen Jain"
+                  placeholder="e.g. Anvit Jain"
                   {...register('fullName', {
                     required: 'Name is required',
                     minLength: { value: 2, message: 'Enter at least 2 characters' },
@@ -100,79 +107,89 @@ export default function CheckoutPage() {
                 />
               </Field>
 
-              <Field id="email" label="Email (for receipt)" error={errors.email?.message}>
-                <input
-                  id="email"
-                  type="email"
-                  className={inputClass(Boolean(errors.email))}
-                  placeholder="you@example.com"
-                  {...register('email', {
-                    required: 'Email is required',
-                    pattern: {
-                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: 'Enter a valid email',
-                    },
-                  })}
-                />
-              </Field>
+              {!isFree ? (
+                <>
+                  <Field id="email" label="Email (for receipt)" error={errors.email?.message}>
+                    <input
+                      id="email"
+                      type="email"
+                      className={inputClass(Boolean(errors.email))}
+                      placeholder="you@example.com"
+                      {...register('email', {
+                        required: 'Email is required',
+                        pattern: {
+                          value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                          message: 'Enter a valid email',
+                        },
+                      })}
+                    />
+                  </Field>
 
-              <Field
-                id="cardNumber"
-                label="Card number"
-                error={errors.cardNumber?.message}
-              >
-                <input
-                  id="cardNumber"
-                  inputMode="numeric"
-                  autoComplete="cc-number"
-                  className={inputClass(Boolean(errors.cardNumber))}
-                  placeholder="4111 1111 1111 1111"
-                  {...register('cardNumber', {
-                    required: 'Card number is required',
-                    validate: (value) =>
-                      value.replace(/\s/g, '').length >= 12 || 'Enter at least 12 digits',
-                  })}
-                />
-              </Field>
+                  <Field
+                    id="cardNumber"
+                    label="Card number"
+                    error={errors.cardNumber?.message}
+                  >
+                    <input
+                      id="cardNumber"
+                      inputMode="numeric"
+                      autoComplete="cc-number"
+                      className={inputClass(Boolean(errors.cardNumber))}
+                      placeholder="4111 1111 1111 1111"
+                      {...register('cardNumber', {
+                        required: 'Card number is required',
+                        validate: (value) =>
+                          value.replace(/\s/g, '').length >= 12 || 'Enter at least 12 digits',
+                      })}
+                    />
+                  </Field>
 
-              <div className="grid grid-cols-2 gap-3">
-                <Field id="expiry" label="Expiry" error={errors.expiry?.message}>
-                  <input
-                    id="expiry"
-                    className={inputClass(Boolean(errors.expiry))}
-                    placeholder="MM/YY"
-                    {...register('expiry', {
-                      required: 'Required',
-                      pattern: {
-                        value: /^(0[1-9]|1[0-2])\/\d{2}$/,
-                        message: 'Use MM/YY',
-                      },
-                    })}
-                  />
-                </Field>
-                <Field id="cvv" label="CVV" error={errors.cvv?.message}>
-                  <input
-                    id="cvv"
-                    inputMode="numeric"
-                    className={inputClass(Boolean(errors.cvv))}
-                    placeholder="123"
-                    {...register('cvv', {
-                      required: 'Required',
-                      pattern: { value: /^\d{3,4}$/, message: '3–4 digits' },
-                    })}
-                  />
-                </Field>
-              </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <Field id="expiry" label="Expiry" error={errors.expiry?.message}>
+                      <input
+                        id="expiry"
+                        className={inputClass(Boolean(errors.expiry))}
+                        placeholder="MM/YY"
+                        {...register('expiry', {
+                          required: 'Required',
+                          pattern: {
+                            value: /^(0[1-9]|1[0-2])\/\d{2}$/,
+                            message: 'Use MM/YY',
+                          },
+                        })}
+                      />
+                    </Field>
+                    <Field id="cvv" label="CVV" error={errors.cvv?.message}>
+                      <input
+                        id="cvv"
+                        inputMode="numeric"
+                        className={inputClass(Boolean(errors.cvv))}
+                        placeholder="123"
+                        {...register('cvv', {
+                          required: 'Required',
+                          pattern: { value: /^\d{3,4}$/, message: '3–4 digits' },
+                        })}
+                      />
+                    </Field>
+                  </div>
+                </>
+              ) : null}
             </div>
 
             <Button type="submit" className="mt-6 w-full gap-2" size="lg" disabled={processing}>
-              <Lock className="h-4 w-4" />
-              {processing ? 'Processing…' : `Pay ${formatInr(test.priceInr)}`}
+              {isFree ? <Gift className="h-4 w-4" /> : <Lock className="h-4 w-4" />}
+              {processing
+                ? 'Processing…'
+                : isFree
+                  ? 'Get free passcode'
+                  : `Pay ${formatInr(test.priceInr)}`}
             </Button>
           </form>
 
           <aside className="h-fit border border-[#E2E8F0] bg-white p-5 shadow-sm sm:p-6">
-            <p className="text-[11px] font-bold tracking-wide text-[#00AEEF] uppercase">Order summary</p>
+            <p className="text-[11px] font-bold tracking-wide text-[#00AEEF] uppercase">
+              Order summary
+            </p>
             <h2 className="mt-2 text-lg font-bold text-[#0F172A]">{test.title}</h2>
             <p className="mt-1 text-sm text-[#64748B]">{test.examType}</p>
             <dl className="mt-5 space-y-2 border-t border-[#F1F5F9] pt-4 text-sm">
@@ -186,7 +203,9 @@ export default function CheckoutPage() {
               </div>
               <div className="flex justify-between gap-3 border-t border-[#F1F5F9] pt-3 text-base">
                 <dt className="font-semibold">Total</dt>
-                <dd className="font-extrabold text-[#0F172A]">{formatInr(test.priceInr)}</dd>
+                <dd className="font-extrabold text-[#0F172A]">
+                  {isFree ? 'Free' : formatInr(test.priceInr)}
+                </dd>
               </div>
             </dl>
           </aside>

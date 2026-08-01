@@ -3,6 +3,22 @@ import type { MockTestProduct } from '@/types/commerce'
 /** Mock catalog of purchasable CBT tests. */
 export const MOCK_TESTS: MockTestProduct[] = [
   {
+    id: 'grade3-free-anvit',
+    title: 'Grade 3 Free Test — Anvit Jain',
+    subtitle: 'Easy Maths & General Knowledge for age 7 (no percentages or fractions)',
+    examType: 'Grade 3 · Free Practice',
+    questions: 30,
+    durationMinutes: 40,
+    priceInr: 0,
+    badge: 'Free',
+    features: [
+      '30 easy questions · 40 minutes',
+      '15 Maths + 15 General Knowledge',
+      'No percentages, ratios or fractions',
+      'Made for Anvit Jain',
+    ],
+  },
+  {
     id: 'bank-po-prelims',
     title: 'Bank PO Prelims Mock',
     subtitle: 'Full-length CBT with English, Quant & Reasoning',

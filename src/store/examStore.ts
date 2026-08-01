@@ -1,17 +1,19 @@
 import { create } from 'zustand'
-import { examMeta, questions as allQuestions } from '@/data/questions'
+import { getExamByTestId } from '@/data/examRegistry'
 import {
   QuestionStatus,
+  type ExamMeta,
   type ExamState,
   type PaletteFilter,
+  type Question,
   type QuestionAttempt,
   type SectionId,
   type StatusCounts,
 } from '@/types/exam'
 
-function createInitialAttempts(): Record<string, QuestionAttempt> {
+function createInitialAttempts(questions: Question[]): Record<string, QuestionAttempt> {
   return Object.fromEntries(
-    allQuestions.map((question, index) => [
+    questions.map((question, index) => [
       question.id,
       {
         selectedOptionId: null,
@@ -31,7 +33,28 @@ function deriveStatus(selectedOptionId: string | null, isMarkedForReview: boolea
   return QuestionStatus.NOT_ANSWERED
 }
 
+function buildExamSlice(meta: ExamMeta, questions: Question[]) {
+  return {
+    meta,
+    questions,
+    attempts: createInitialAttempts(questions),
+    currentQuestionId: questions[0]?.id ?? '',
+    currentSectionId: (meta.sections[0]?.id ?? 'mathematics') as SectionId,
+    remainingSeconds: meta.totalDurationMinutes * 60,
+    isPaused: false,
+    isLocked: false,
+    paletteFilter: 'ALL' as PaletteFilter,
+    lastAutosavedAt: null,
+  }
+}
+
+const bootstrap = getExamByTestId(null)
+
 interface ExamStore extends ExamState {
+  loadedTestId: string | null
+  loadExam: (testId: string) => void
+  /** Autosave + freeze timer/answers (time-up or final submit). */
+  lockExam: () => void
   setCurrentQuestion: (questionId: string) => void
   setSection: (sectionId: SectionId) => void
   selectOption: (optionId: string) => void
@@ -47,23 +70,35 @@ interface ExamStore extends ExamState {
   toggleBookmark: () => void
   autosave: () => void
   getSectionCounts: (sectionId?: SectionId) => StatusCounts
-  getSectionQuestions: (sectionId?: SectionId) => typeof allQuestions
-  getCurrentQuestion: () => (typeof allQuestions)[number]
+  getSectionQuestions: (sectionId?: SectionId) => Question[]
+  getCurrentQuestion: () => Question
   getProgressPercent: () => number
 }
 
 export const useExamStore = create<ExamStore>((set, get) => ({
-  meta: examMeta,
-  questions: allQuestions,
-  attempts: createInitialAttempts(),
-  currentQuestionId: allQuestions[0].id,
-  currentSectionId: 'english',
-  remainingSeconds: examMeta.totalDurationMinutes * 60,
-  isPaused: false,
+  ...buildExamSlice(bootstrap.meta, bootstrap.questions),
+  loadedTestId: null,
   isDarkMode: false,
   isSidebarOpen: false,
-  paletteFilter: 'ALL',
-  lastAutosavedAt: null,
+
+  loadExam: (testId) => {
+    const pack = getExamByTestId(testId)
+    set({
+      ...buildExamSlice(pack.meta, pack.questions),
+      loadedTestId: testId,
+    })
+  },
+
+  lockExam: () => {
+    const state = get()
+    if (state.isLocked) return
+    set({
+      isLocked: true,
+      isPaused: true,
+      isSidebarOpen: false,
+      lastAutosavedAt: Date.now(),
+    })
+  },
 
   getCurrentQuestion: () => {
     const state = get()
@@ -109,7 +144,8 @@ export const useExamStore = create<ExamStore>((set, get) => ({
     return Math.round((answeredLike / state.questions.length) * 100)
   },
 
-  setCurrentQuestion: (questionId) =>
+  setCurrentQuestion: (questionId) => {
+    if (get().isLocked) return
     set((state) => {
       const question = state.questions.find((item) => item.id === questionId)
       if (!question) return state
@@ -128,14 +164,17 @@ export const useExamStore = create<ExamStore>((set, get) => ({
           [questionId]: { ...attempt, status: nextStatus },
         },
       }
-    }),
+    })
+  },
 
   setSection: (sectionId) => {
+    if (get().isLocked) return
     const first = get().questions.find((q) => q.sectionId === sectionId)
     if (first) get().setCurrentQuestion(first.id)
   },
 
-  selectOption: (optionId) =>
+  selectOption: (optionId) => {
+    if (get().isLocked) return
     set((state) => {
       const id = state.currentQuestionId
       const attempt = state.attempts[id]
@@ -149,9 +188,11 @@ export const useExamStore = create<ExamStore>((set, get) => ({
           },
         },
       }
-    }),
+    })
+  },
 
-  clearResponse: () =>
+  clearResponse: () => {
+    if (get().isLocked) return
     set((state) => {
       const id = state.currentQuestionId
       const attempt = state.attempts[id]
@@ -165,9 +206,11 @@ export const useExamStore = create<ExamStore>((set, get) => ({
           },
         },
       }
-    }),
+    })
+  },
 
-  toggleMarkForReview: () =>
+  toggleMarkForReview: () => {
+    if (get().isLocked) return
     set((state) => {
       const id = state.currentQuestionId
       const attempt = state.attempts[id]
@@ -182,9 +225,11 @@ export const useExamStore = create<ExamStore>((set, get) => ({
           },
         },
       }
-    }),
+    })
+  },
 
   goNext: () => {
+    if (get().isLocked) return
     const state = get()
     const sectionQuestions = state.getSectionQuestions()
     const index = sectionQuestions.findIndex((q) => q.id === state.currentQuestionId)
@@ -199,6 +244,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
   },
 
   goPrevious: () => {
+    if (get().isLocked) return
     const state = get()
     const sectionQuestions = state.getSectionQuestions()
     const index = sectionQuestions.findIndex((q) => q.id === state.currentQuestionId)
@@ -217,7 +263,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
 
   tick: () =>
     set((state) => {
-      if (state.isPaused || state.remainingSeconds <= 0) return state
+      if (state.isLocked || state.isPaused || state.remainingSeconds <= 0) return state
       const id = state.currentQuestionId
       const attempt = state.attempts[id]
       return {
@@ -229,11 +275,21 @@ export const useExamStore = create<ExamStore>((set, get) => ({
       }
     }),
 
-  togglePause: () => set((state) => ({ isPaused: !state.isPaused })),
+  togglePause: () => {
+    if (get().isLocked) return
+    set((state) => ({ isPaused: !state.isPaused }))
+  },
   toggleDarkMode: () => set((state) => ({ isDarkMode: !state.isDarkMode })),
-  toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
-  setPaletteFilter: (filter) => set({ paletteFilter: filter }),
-  toggleBookmark: () =>
+  toggleSidebar: () => {
+    if (get().isLocked) return
+    set((state) => ({ isSidebarOpen: !state.isSidebarOpen }))
+  },
+  setPaletteFilter: (filter) => {
+    if (get().isLocked) return
+    set({ paletteFilter: filter })
+  },
+  toggleBookmark: () => {
+    if (get().isLocked) return
     set((state) => {
       const id = state.currentQuestionId
       const attempt = state.attempts[id]
@@ -243,6 +299,7 @@ export const useExamStore = create<ExamStore>((set, get) => ({
           [id]: { ...attempt, bookmarked: !attempt.bookmarked },
         },
       }
-    }),
+    })
+  },
   autosave: () => set({ lastAutosavedAt: Date.now() }),
 }))

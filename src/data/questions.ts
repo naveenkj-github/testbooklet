@@ -187,6 +187,8 @@ export const questions: Question[] = [
     english: 0,
     quantitative: 1,
     reasoning: 2,
+    mathematics: 3,
+    general_knowledge: 4,
   }
   if (sectionOrder[a.sectionId] !== sectionOrder[b.sectionId]) {
     return sectionOrder[a.sectionId] - sectionOrder[b.sectionId]

@@ -11,6 +11,7 @@ export function useExam(onAutoSubmit?: () => void) {
   const questions = useExamStore((s) => s.questions)
   const meta = useExamStore((s) => s.meta)
   const isPaused = useExamStore((s) => s.isPaused)
+  const isLocked = useExamStore((s) => s.isLocked)
   const isDarkMode = useExamStore((s) => s.isDarkMode)
   const isSidebarOpen = useExamStore((s) => s.isSidebarOpen)
   const paletteFilter = useExamStore((s) => s.paletteFilter)
@@ -30,6 +31,7 @@ export function useExam(onAutoSubmit?: () => void) {
   const setPaletteFilter = useExamStore((s) => s.setPaletteFilter)
   const toggleBookmark = useExamStore((s) => s.toggleBookmark)
   const autosave = useExamStore((s) => s.autosave)
+  const lockExam = useExamStore((s) => s.lockExam)
   const getSectionCounts = useExamStore((s) => s.getSectionCounts)
   const getSectionQuestions = useExamStore((s) => s.getSectionQuestions)
   const getProgressPercent = useExamStore((s) => s.getProgressPercent)
@@ -42,15 +44,16 @@ export function useExam(onAutoSubmit?: () => void) {
   useTimer(onAutoSubmit)
 
   useEffect(() => {
+    if (isLocked) return undefined
     const id = window.setInterval(() => {
       autosave()
     }, 10_000)
     return () => window.clearInterval(id)
-  }, [autosave])
+  }, [autosave, isLocked])
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (isPaused) return
+      if (isPaused || isLocked) return
       const target = event.target as HTMLElement | null
       if (target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName)) return
 
@@ -65,7 +68,7 @@ export function useExam(onAutoSubmit?: () => void) {
         if (option) selectOption(option.id)
       }
     },
-    [currentQuestion.options, goNext, goPrevious, isPaused, selectOption],
+    [currentQuestion.options, goNext, goPrevious, isLocked, isPaused, selectOption],
   )
 
   useEffect(() => {
@@ -86,6 +89,7 @@ export function useExam(onAutoSubmit?: () => void) {
     progressPercent: getProgressPercent(),
     remainingSeconds,
     isPaused,
+    isLocked,
     isDarkMode,
     isSidebarOpen,
     paletteFilter,
@@ -102,5 +106,7 @@ export function useExam(onAutoSubmit?: () => void) {
     toggleSidebar,
     setPaletteFilter,
     toggleBookmark,
+    autosave,
+    lockExam,
   }
 }
