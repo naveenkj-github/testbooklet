@@ -1,5 +1,5 @@
 import { examMeta as bankPoMeta, questions as bankPoQuestions } from '@/data/questions'
-import { grade3ExamMeta, grade3Questions } from '@/data/grade3FreeTest'
+import { GRADE3_EXAMS } from '@/data/grade3FreeTest'
 import type { ExamMeta, Question } from '@/types/exam'
 
 export interface ExamPackage {
@@ -11,7 +11,7 @@ const EXAMS: Record<string, ExamPackage> = {
   'bank-po-prelims': { meta: bankPoMeta, questions: bankPoQuestions },
   'bank-po-mains': { meta: bankPoMeta, questions: bankPoQuestions },
   'ibps-clerk-prelims': { meta: bankPoMeta, questions: bankPoQuestions },
-  'grade3-free-anvit': { meta: grade3ExamMeta, questions: grade3Questions },
+  ...GRADE3_EXAMS,
 }
 
 const DEFAULT_EXAM = EXAMS['bank-po-prelims']
